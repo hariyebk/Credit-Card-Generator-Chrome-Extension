@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Credit Card Generator </title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+        <link href="./output.css" rel="stylesheet">
+    </head>
+    <body class="max-w-[500px] h-[300px] border border-red-500 px-10 py-5 bg-background">
+        <h1 class="text-xl text-primary"> Credit Card Generator </h1>
+        <div class="flex flex-col items-start mt-6">
+            <select id="credit-card-provider" class="bg-primary w-[300px] h-auto px-7 py-2 rounded-sm text-black text-base focus-visible:outline-none">
+                <option value=""> Select a credit card provider </option>
+                <option value="Visa"> Visa </option>
+                <option value="Mastercard"> Mastercard </option>
+                <option value="American_Express"> American Express </option>
+            </select>
+            <select id="country" class="mt-7 bg-primary w-[300px] h-auto px-7 py-2 rounded-sm text-black text-base focus-visible:outline-none">
+                <option value="">Select a country</option>
+                <option value="USA"> USA </option>
+                <option value="Germany"> Germany </option>
+                <option value="France"> France </option>
+                <option value="United Kingdom"> United Kingdom </option>
+                <option value="Spain"> Spain </option>
+                <option value="Italy"> Italy </option>
+                <option value="Canada"> Canada </option>
+                <option value="Australia"> Australia </option>
+                <option value="Poland"> Poland </option>
+                <option value="Mexico"> Mexico </option>
+                <option value="India"> India </option>
+                <option value="Denmark"> Denmark </option>
+                <option value="Brazil"> Brazil </option>
+                <option value="Turkey"> Turkey </option>
+                <option value="Argentina"> Argentina </option>
+                <option value="Romania"> Romania </option>
+                <option value="Hungary"> Hungary </option>
+                <option value="Pakistan"> Pakistan </option>
+                <option value="Indonesia"> Indonesia </option>
+            </select>
+            <button id="generate-button" class="mt-10 bg-button w-[200px] h-auto px-5 py-2.5 rounded-md text-black font-semibold
+            focus-visible:outline-none">
+                Generate Credit Card
+            </button>
+            <div id="credit-card-info"></div>
+        </div>
+
+        <script src="popup.js"></script>
+    </body>
+</html>

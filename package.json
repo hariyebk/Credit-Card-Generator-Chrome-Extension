@@ -1,0 +1,17 @@
+{
+  "name": "credit-card-generator",
+  "version": "1.0.0",
+  "description": "A simple credit card generator chrome extension ",
+  "scripts": {
+    "build": "tsc -w"
+  },
+  "keywords": [
+    "credit card",
+    "payment"
+  ],
+  "author": "Harun Bekri",
+  "license": "MIT",
+  "devDependencies": {
+    "tailwindcss": "^3.4.4"
+  }
+}
