@@ -1,3 +1,4 @@
+// Selecting all the necessary elements
 const generateBtn = document.getElementById("generate-button")
 const cardProvider = document.getElementById("credit-card-provider")
 const countryElement = document.getElementById("country")
