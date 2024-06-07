@@ -34,12 +34,17 @@ generateBtn.addEventListener("click", async () => {
     });
     // Parse the result
     const data = await response.json();
+    // Let's generate a random ZIP code since our Credit Card Information provider doesn't give us the ZIP code
+    const addressData = await fetch("https://random-data-api.com/api/address/random_address")
+    const addressResult = await addressData.json()
     //  Get all the information from the data
     const cardNumber = data?.cardNumber
     const cvv = data?.cvv
     const expiration_date = data?.date.split("T")[0]
     const fullName = data?.fullName 
     const pin = data?.pin
+    const zipCode = addressResult?.zip_code
+    const streetAddress = addressResult?.street_address
     const type = data?.type
     const generated_date = new Date().toISOString().split("T")[0]
     // Enable the generate button
@@ -84,6 +89,24 @@ generateBtn.addEventListener("click", async () => {
                     <p class="text-base mt-1"> ${pin} </p>
                 </span>
                 <button id="copy-btn" class="bg-card bg-opacity-80 px-2 py-1.5 mt-1 rounded-md border border-gray-700 focus-visible:outline-none" data-clipboard-text="${pin}">
+                    <image src="./copy.png" alt="copy-icon" width="15px" height="8px" />
+                </button>
+            </div>
+            <div class="flex items-start justify-center gap-5">
+                <span class="flex items-center gap-2">
+                    <h3 class="text-lg font-semibold"> Zip Code :</h3>
+                    <p class="text-base mt-1"> ${zipCode} </p>
+                </span>
+                <button id="copy-btn" class="bg-card bg-opacity-80 px-2 py-1.5 mt-1 rounded-md border border-gray-700 focus-visible:outline-none" data-clipboard-text="${zipCode}">
+                    <image src="./copy.png" alt="copy-icon" width="15px" height="8px" />
+                </button>
+            </div>
+            <div class="flex items-start justify-center gap-5">
+                <span class="flex items-center gap-2">
+                    <h3 class="text-lg font-semibold"> Street Address :</h3>
+                    <p class="text-base mt-1"> ${streetAddress} </p>
+                </span>
+                <button id="copy-btn" class="bg-card bg-opacity-80 px-2 py-1.5 mt-1 rounded-md border border-gray-700 focus-visible:outline-none" data-clipboard-text="${streetAddress}">
                     <image src="./copy.png" alt="copy-icon" width="15px" height="8px" />
                 </button>
             </div>
