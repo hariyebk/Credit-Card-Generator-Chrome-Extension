@@ -2756,10 +2756,6 @@ video {
     padding-right: 1.5rem;
   }
 
-  .max-md\:pr-7 {
-    padding-right: 1.75rem;
-  }
-
   .max-md\:text-2xl {
     font-size: 1.5rem;
     line-height: 2rem;

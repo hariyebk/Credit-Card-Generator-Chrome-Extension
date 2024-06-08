@@ -1,14 +1,12 @@
 // Selecting all the necessary elements
 const generateBtn = document.getElementById("generate-button")
 const cardProvider = document.getElementById("credit-card-provider")
-const countryElement = document.getElementById("country")
 const resultElement = document.getElementById("credit-card-info")
 const starElement = document.getElementById("stars")
 
 generateBtn.addEventListener("click", async () => {
     // Get the selected provider and country
     const provider = cardProvider.value;
-    const country =  countryElement.value;
     const apikey = "a7e0945c7f524a25b636223e2049d5c2";
     // Disable the generate button
     generateBtn.setAttribute("disabled", true)
@@ -116,15 +114,6 @@ generateBtn.addEventListener("click", async () => {
                     <p class="text-base mt-1"> ${type} </p>
                 </span>
                 <button id="copy-btn" class="copy-btn bg-card bg-opacity-80 px-2 py-1.5 mt-1 rounded-md border border-gray-700 focus-visible:outline-none" data-clipboard-text="${type}">
-                    <image src="./copy.png" alt="copy-icon" width="15px" height="8px" />
-                </button>
-            </div>
-            <div class="flex items-start justify-center gap-5">
-                <span class="flex items-center gap-2">
-                    <h3 class="text-[17px] font-semibold"> Country :</h3>
-                    <p class="text-base mt-1"> ${country} </p>
-                </span>
-                <button id="copy-btn" class="bg-card bg-opacity-80 px-2 py-1.5 mt-1 rounded-md border border-gray-700 focus-visible:outline-none" data-clipboard-text="${country}">
                     <image src="./copy.png" alt="copy-icon" width="15px" height="8px" />
                 </button>
             </div>
