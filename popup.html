@@ -5,48 +5,57 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
         <link href="./output.css" rel="stylesheet">
+        <style>
+            .star {
+                color: #dfdfd7;
+            }
+            .star.hovered {
+                color: #EAB308;
+            }
+            .star.red {
+                color: red;
+            }
+        </style>
     </head>
-    <body class="w-[450px] h-auto py-10 bg-background rounded-md overflow-y-scroll">
+    <body class="w-[550px] h-auto py-10 bg-background rounded-md overflow-y-scroll">
         <div class="flex flex-col items-center justify-center">
             <h1 class="text-3xl text-primary text-center"> Harun CCG </h1>
-            <span class="text-xs text-secondary text-center mt-4 max-w-[400px]"> ⚠️ <strong> Warning : </strong> The Credit Card Generated below is only for a testing purpose. It was generated based on mathematical formula, not real card numbers.  The numbers are fake and you should not use these information to make any purchase. </span>
             <div class="flex flex-col items-center mt-10">
                 <div class="bg-primary w-[270px] h-auto px-7 rounded-md">
                     <select id="credit-card-provider" class="bg-primary w-[200px] h-auto px-4 py-2 rounded-sm text-black text-base focus-visible:outline-none">
-                        <option value="" disabled hidden> Select a credit card provider </option>
                         <option value="visa"> Visa </option>
                         <option value="mastercard"> Mastercard </option>
                         <option value="americanexpress"> American Express </option>
                         <option value="jcb"> JCB </option>
                     </select>
                 </div>
+                <div class="bg-primary w-[270px] h-auto px-7 rounded-md mt-5">
+                    <select id="country" class="bg-primary w-[200px] h-auto px-4 py-2 rounded-sm text-black text-base focus-visible:outline-none">
+                        <option value="us"> USA </option>
+                        <option value="de"> Germany </option>
+                        <option value="fr"> France </option>
+                        <option value="gb"> United Kingdom </option>
+                        <option value="ca"> Canada </option>
+                        <option value="au"> Australia </option>
+                        <option value="dk"> Denmark </option>
+                        <option value="es"> Spain </option>
+                    </select>
+                </div>
                 <button id="generate-button" class="mt-10 bg-button w-[200px] h-auto px-5 py-2.5 rounded-md flex items-center justify-center focus-visible:outline-none disabled:cursor-not-allowed">
                     <p class="text-black text-base font-semibold"> Generate </p>
                 </button>
-                <div id="credit-card-info" class="mt-10 mb-5 ml-7"></div>
+                <div id="credit-card-info" class="mt-10 mb-5 ml-14"></div>
             </div>
             <div class="mt-8 flex flex-col items-start justify-start gap-6">
-                <div class="flex items-start gap-2">
-                    <p class="text-base mt-0.5"> 😍 </p>
-                    <h3 class="text-xl text-blue-400 font-semibold"> Give us a rating </h3>
-                </div>
-                <div id="stars" class="flex items-center gap-3 ml-4">
-                    <a href="https://chrome.google.com/webstore/rating/aldlgngpodfoinnkbbebojbofailonho" target="_blank" id="star"> 
-                        <image src="./star.png" alt="star-icon" width="20px" height="20px" class="hover:text-main" />
-                    </a>
-                    <a href="https://chrome.google.com/webstore/rating/aldlgngpodfoinnkbbebojbofailonho" target="_blank" id="star"> 
-                        <image src="./star.png" alt="star-icon" width="20px" height="20px" />
-                    </a>
-                    <a href="https://chrome.google.com/webstore/rating/aldlgngpodfoinnkbbebojbofailonho" target="_blank" id="star"> 
-                        <image src="./star.png" alt="star-icon" width="20px" height="20px" />
-                    </a>
-                    <a href="https://chrome.google.com/webstore/rating/aldlgngpodfoinnkbbebojbofailonho" target="_blank" id="star"> 
-                        <image src="./star.png" alt="star-icon" width="20px" height="20px" />
-                    </a>
-                    <a href="https://chrome.google.com/webstore/rating/aldlgngpodfoinnkbbebojbofailonho" target="_blank" id="star"> 
-                        <image src="./star.png" alt="star-icon" width="20px" height="20px" />
-                    </a>
+                <h3 class="text-2xl text-blue-400 font-semibold"> Give us a rating </h3>
+                <div id="star-widget" class="flex space-x-3 mt-3">
+                    <i class="star fa fa-star text-2xl cursor-pointer"></i>
+                    <i class="star fa fa-star text-2xl cursor-pointer"></i>
+                    <i class="star fa fa-star text-2xl cursor-pointer"></i>
+                    <i class="star fa fa-star text-2xl cursor-pointer"></i>
+                    <i class="star fa fa-star text-2xl cursor-pointer"></i>
                 </div>
             </div>
         </div>

@@ -1,12 +1,13 @@
 // Selecting all the necessary elements
 const generateBtn = document.getElementById("generate-button")
 const cardProvider = document.getElementById("credit-card-provider")
-const resultElement = document.getElementById("credit-card-info")
-const starElement = document.getElementById("stars")
+const countryElement = document.getElementById("country")
+const stars = document.querySelectorAll(".star")
 
 generateBtn.addEventListener("click", async () => {
     // Get the selected provider and country
     const provider = cardProvider.value;
+    const country = countryElement.value
     const apikey = "a7e0945c7f524a25b636223e2049d5c2";
     // Disable the generate button
     generateBtn.setAttribute("disabled", true)
@@ -32,19 +33,24 @@ generateBtn.addEventListener("click", async () => {
     });
     // Parse the result
     const data = await response.json();
-    // Let's generate a random ZIP code since our Credit Card Information provider doesn't give us the ZIP code
-    const addressData = await fetch("https://random-data-api.com/api/address/random_address")
-    const addressResult = await addressData.json()
-    //  Get all the information from the data
-    const cardNumber = data?.cardNumber
-    const cvv = data?.cvv
-    const expiration_date = data?.date.split("T")[0]
-    const fullName = data?.fullName 
-    const pin = data?.pin
-    const zipCode = addressResult?.zip_code
-    const streetAddress = addressResult?.street_address
-    const type = data?.type
-    const generated_date = new Date().toISOString().split("T")[0]
+    // Let's generate a random ZIP code and address in the US since our Credit Card Information provider API doesn't give us the ZIP code  and adress
+    const randomUserAddress = await fetch(`https://randomuser.me/api/?nat=${country}`)
+    const randomUserAddressResult = await randomUserAddress.json()
+    const {city, state, street, postcode } = randomUserAddressResult?.results[0].location
+    const {first, last} = randomUserAddressResult?.results[0].name
+    const credit_card_data = {
+        cardNumber: data?.cardNumber,
+        cvv: data?.cvv,
+        expiration_date: data?.date.split("T")[0],
+        fullName: `${first} ${last}`,
+        pin: data?.pin,
+        postCode: postcode,
+        address: `${street.number} ${street.name}, ${city}, ${state}`,
+        type: data?.type,
+        generated_date: new Date().toISOString().split("T")[0],
+        cardSelected: provider,
+        countrySelected: country
+    }
     // Enable the generate button
     generateBtn.removeAttribute("disabled")
     // return the button state to the original
@@ -52,7 +58,69 @@ generateBtn.addEventListener("click", async () => {
         <p class="text-black text-base font-semibold"> Generate </p>
     `
     // Append the result to the DOM
-    resultElement.innerHTML = `
+    appendResult(credit_card_data.cardNumber, credit_card_data.cvv, credit_card_data.fullName, credit_card_data.pin, credit_card_data.postCode, credit_card_data.address, credit_card_data.type, credit_card_data.expiration_date, credit_card_data.generated_date)
+    // store the result in the chrome storage
+    chrome.storage.local.set({ creditCardInfo: credit_card_data}, function() {
+        console.log('Credit card information stored successfully');
+    });
+    Copy()
+})
+
+let currentRating = 0;
+
+stars.forEach((star, index) => {
+    // For each star we're listening for a hover event to fire , then we will remove any existing hover effects and add a new one for each star
+    star.addEventListener('mouseover', () => {
+        resetStars();
+        for (let i = 0; i <= index; i++) {
+            stars[i].classList.add('hovered');
+        }
+    });
+
+    // During Mouse out event we remove any hover effects from all stars using the resetStars function , then if the current rating is greater than 0, we will add the hover effect for thise special stars.
+    star.addEventListener('mouseout', () => {
+        resetStars();
+        if (currentRating > 0 && currentRating >= 4) {
+            for (let i = 0; i < currentRating; i++) {
+                stars[i].classList.add('hovered');
+            }
+        }
+
+        if(currentRating > 0 && currentRating <= 3){
+            for (let i = 0; i < currentRating; i++) {
+                stars[i].classList.add('red');
+            }
+        }
+    });
+    
+
+    // Lisening to the click event  to redirect the user based on the rating
+    star.addEventListener('click', () => {
+        currentRating = index + 1;
+        if (currentRating >= 4) {
+            window.open("https://www.google.com/", "_blank");
+        } 
+        else if (currentRating <= 3) {
+            for (let i = 0; i <= index; i++) {
+                stars[i].classList.add('red');
+            }
+            window.open('https://www.youtube.com/hashtag/funnyvideo' , "_blank");
+        }
+    });
+})
+
+// A function that removes the hover and red property from each star by looping over them
+function resetStars() {
+    stars.forEach(star => {
+        star.classList.remove('hovered');
+        star.classList.remove('red')
+    });
+}
+
+// A reusable function to display the results in the DOM
+function appendResult(cardNumber, cvv, fullName, pin, postCode, address, type, expiration_date, generated_date){
+    const resultElement = document.getElementById("credit-card-info")
+    return resultElement.innerHTML = `
         <div class="text-primary text-base flex flex-col items-start gap-4">
             <div class="flex items-start justify-center gap-5">
                 <span class="flex items-center gap-2">
@@ -92,19 +160,19 @@ generateBtn.addEventListener("click", async () => {
             </div>
             <div class="flex items-start justify-center gap-5">
                 <span class="flex items-center gap-2">
-                    <h3 class="text-[17px] font-semibold"> Zip Code :</h3>
-                    <p class="text-base mt-1"> ${zipCode} </p>
+                    <h3 class="text-[17px] font-semibold"> postcode :</h3>
+                    <p class="text-base mt-1"> ${postCode} </p>
                 </span>
-                <button id="copy-btn" class="bg-card bg-opacity-80 px-2 py-1.5 mt-1 rounded-md border border-gray-700 focus-visible:outline-none" data-clipboard-text="${zipCode}">
+                <button id="copy-btn" class="bg-card bg-opacity-80 px-2 py-1.5 mt-1 rounded-md border border-gray-700 focus-visible:outline-none" data-clipboard-text="${postCode}">
                     <image src="./copy.png" alt="copy-icon" width="15px" height="8px" />
                 </button>
             </div>
-            <div class="flex items-start justify-center gap-5">
+            <div class="flex flex-wrap items-start justify-center gap-2">
                 <span class="flex items-center gap-2">
-                    <h3 class="text-[17px] font-semibold"> Street Address :</h3>
-                    <p class="text-base mt-1"> ${streetAddress} </p>
+                    <h3 class="text-[17px] font-semibold"> Address :</h3>
+                    <p class="text-base mt-1"> ${address} </p>
                 </span>
-                <button id="copy-btn" class="bg-card bg-opacity-80 px-2 py-1.5 mt-1 rounded-md border border-gray-700 focus-visible:outline-none" data-clipboard-text="${streetAddress}">
+                <button id="copy-btn" class="bg-card bg-opacity-80 px-2 py-1.5 mt-1 rounded-md border border-gray-700 focus-visible:outline-none" data-clipboard-text="${address}">
                     <image src="./copy.png" alt="copy-icon" width="15px" height="8px" />
                 </button>
             </div>
@@ -137,8 +205,11 @@ generateBtn.addEventListener("click", async () => {
             </div>
         </div>
     `
-    const copyButtons = document.querySelectorAll("#copy-btn")
+}
 
+// A function that copies the clicked values into the user's clipboard
+function Copy(){
+    const copyButtons = document.querySelectorAll("#copy-btn")
     // Litsen for click event on the copy button
     copyButtons.forEach((button) => {
         button.addEventListener('click', () => {
@@ -149,4 +220,21 @@ generateBtn.addEventListener("click", async () => {
             `;
         })
     })
+}
+
+// Litsening for the user to open our extension , then we will load the data from the storage to display it on the DOM.
+document.addEventListener('DOMContentLoaded', function() {
+    chrome.storage.local.get('creditCardInfo', function(result) {
+        if (result.creditCardInfo) {
+            const data = result.creditCardInfo
+            // Show the stored data
+            appendResult(data.cardNumber, data.cvv, data.fullName, data.pin, data.postCode, data.address, data.type, data.expiration_date, data.generated_date)
+            // Enable the copy feature
+            Copy()
+            // Change the credit card provider and country to match the stored data
+            cardProvider.value = data.cardSelected
+            countryElement.value = data.countrySelected
+        } 
+        else return 
+    });
 })

@@ -723,24 +723,12 @@ video {
   margin-bottom: 1.25rem;
 }
 
-.ml-4 {
-  margin-left: 1rem;
-}
-
-.ml-7 {
-  margin-left: 1.75rem;
+.ml-14 {
+  margin-left: 3.5rem;
 }
 
 .mr-3 {
   margin-right: 0.75rem;
-}
-
-.mt-0 {
-  margin-top: 0px;
-}
-
-.mt-0\.5 {
-  margin-top: 0.125rem;
 }
 
 .mt-1 {
@@ -759,8 +747,12 @@ video {
   margin-top: 6rem;
 }
 
-.mt-4 {
-  margin-top: 1rem;
+.mt-3 {
+  margin-top: 0.75rem;
+}
+
+.mt-5 {
+  margin-top: 1.25rem;
 }
 
 .mt-6 {
@@ -894,8 +886,8 @@ video {
   width: 270px;
 }
 
-.w-\[450px\] {
-  width: 450px;
+.w-\[550px\] {
+  width: 550px;
 }
 
 .w-\[this-is\\\\\] {
@@ -908,10 +900,6 @@ video {
 
 .w-\[weird-and-invalid\] {
   width: weird-and-invalid;
-}
-
-.max-w-\[400px\] {
-  max-width: 400px;
 }
 
 .flex-shrink {
@@ -982,6 +970,10 @@ video {
 
 .animate-spin {
   animation: spin 1s linear infinite;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
 
 .touch-auto {
@@ -1470,6 +1462,12 @@ video {
   --tw-space-x-reverse: 0;
   margin-right: calc(0.5rem * var(--tw-space-x-reverse));
   margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.space-x-3 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(0.75rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.75rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .space-y-reverse > :not([hidden]) ~ :not([hidden]) {
@@ -2163,6 +2161,11 @@ video {
   vertical-align: super;
 }
 
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
@@ -2175,16 +2178,6 @@ video {
 .text-base {
   font-size: 1rem;
   line-height: 1.5rem;
-}
-
-.text-xl {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-}
-
-.text-xs {
-  font-size: 0.75rem;
-  line-height: 1rem;
 }
 
 .font-bold {
@@ -2285,11 +2278,6 @@ video {
 .text-primary {
   --tw-text-opacity: 1;
   color: rgb(223 223 215 / var(--tw-text-opacity));
-}
-
-.text-secondary {
-  --tw-text-opacity: 1;
-  color: rgb(153 153 160 / var(--tw-text-opacity));
 }
 
 .text-white {
@@ -2711,11 +2699,6 @@ video {
   font-weight: 700;
 }
 
-.hover\:text-main:hover {
-  --tw-text-opacity: 1;
-  color: rgb(227 96 2 / var(--tw-text-opacity));
-}
-
 .before\:hover\:text-center:hover::before {
   content: var(--tw-content);
   text-align: center;
@@ -2761,11 +2744,6 @@ video {
     line-height: 2rem;
   }
 
-  .max-md\:text-base {
-    font-size: 1rem;
-    line-height: 1.5rem;
-  }
-
   .max-md\:text-lg {
     font-size: 1.125rem;
     line-height: 1.75rem;
@@ -2786,11 +2764,6 @@ video {
   .md\:text-4xl {
     font-size: 2.25rem;
     line-height: 2.5rem;
-  }
-
-  .md\:text-lg {
-    font-size: 1.125rem;
-    line-height: 1.75rem;
   }
 
   .md\:text-xl {
